@@ -455,25 +455,6 @@ export const ProfilePage: React.FC = () => {
                 </span>
               </button>
               <button
-                onClick={() => setStatusFilter('LATE')}
-                className={`flex flex-row justify-center items-center px-3 md:px-4 py-1.5 md:py-2 gap-2 w-[93px] md:w-[101px] h-8 md:h-10 rounded-full ${
-                  statusFilter === 'LATE'
-                    ? 'bg-[#F6F9FE] border border-[#1C65DA]'
-                    : 'border border-[#D5D7DA]'
-                }`}
-              >
-                <span
-                  className={`font-semibold md:font-bold text-xs md:text-base leading-[20px] md:leading-[30px] tracking-[-0.02em] ${
-                    statusFilter === 'LATE'
-                      ? 'text-[#1C65DA]'
-                      : 'text-[#0A0D12]'
-                  }`}
-                  style={{ fontFamily: 'Quicksand, sans-serif' }}
-                >
-                  Overdue
-                </span>
-              </button>
-              <button
                 onClick={() => setStatusFilter('RETURNED')}
                 className={`flex flex-row justify-center items-center px-3 md:px-4 py-1.5 md:py-2 gap-2 w-[88px] md:w-[96px] h-8 md:h-10 rounded-full ${
                   statusFilter === 'RETURNED'
@@ -490,6 +471,25 @@ export const ProfilePage: React.FC = () => {
                   style={{ fontFamily: 'Quicksand, sans-serif' }}
                 >
                   Returned
+                </span>
+              </button>
+              <button
+                onClick={() => setStatusFilter('LATE')}
+                className={`flex flex-row justify-center items-center px-3 md:px-4 py-1.5 md:py-2 gap-2 w-[93px] md:w-[101px] h-8 md:h-10 rounded-full ${
+                  statusFilter === 'LATE'
+                    ? 'bg-[#F6F9FE] border border-[#1C65DA]'
+                    : 'border border-[#D5D7DA]'
+                }`}
+              >
+                <span
+                  className={`font-semibold md:font-bold text-xs md:text-base leading-[20px] md:leading-[30px] tracking-[-0.02em] ${
+                    statusFilter === 'LATE'
+                      ? 'text-[#1C65DA]'
+                      : 'text-[#0A0D12]'
+                  }`}
+                  style={{ fontFamily: 'Quicksand, sans-serif' }}
+                >
+                  Overdue
                 </span>
               </button>
             </div>

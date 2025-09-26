@@ -89,7 +89,7 @@ export const BookCard: React.FC<BookCardProps> = ({
             <img
               src={book.coverImage}
               alt={book.title}
-              className='max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300'
+              className='w-full h-full object-cover group-hover:scale-105 transition-transform duration-300'
               onError={(e) => {
                 // Hide the broken image and show placeholder
                 e.currentTarget.style.display = 'none';
