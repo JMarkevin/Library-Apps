@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Star, Search, Edit2, Trash2 } from 'lucide-react';
-import { Card } from '../ui/card';
+import { Star, Edit2, Trash2 } from 'lucide-react';
+import { Card } from '../ui/Card';
 
 interface UserReview {
   id: number;

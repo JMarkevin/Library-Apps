@@ -15,7 +15,7 @@ interface ReviewModalProps {
 export const ReviewModal: React.FC<ReviewModalProps> = ({
   isOpen,
   onClose,
-  bookTitle,
+  bookTitle: _bookTitle,
   onSubmit,
   editingReview,
   onUpdate,

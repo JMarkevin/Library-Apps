@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Edit2, Trash2, X, Check } from 'lucide-react';
-import type { BookDetail, Review as ReviewType } from '../../lib/types';
-import { useBookDetail } from '../../hooks/useBooks';
+import { Edit2, Trash2 } from 'lucide-react';
+import type { Review as ReviewType } from '../../lib/types';
+// import { useBookDetail } from '../../hooks/useBooks';
 
 // Extended user type for reviews with avatar
 interface ReviewUser {
@@ -25,11 +25,11 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
   onEdit,
   onDelete,
   currentUserId,
-  bookId,
+  bookId: _bookId,
 }) => {
   // Fetch book information if bookId is provided
-  const { data: bookData } = useBookDetail(bookId || review.bookId);
-  const book = bookData?.data;
+  // const { data: bookData } = useBookDetail(String(bookId || review.bookId));
+  // const book = bookData;
   const isOwner = currentUserId === review.userId;
   const [showButtons, setShowButtons] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);

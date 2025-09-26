@@ -46,11 +46,11 @@ export const useReturnBook = () => {
       queryClient.invalidateQueries({ queryKey: ['loans'] });
       queryClient.invalidateQueries({ queryKey: ['books'] });
       queryClient.invalidateQueries({
-        queryKey: ['book', response.data.book.id],
+        queryKey: ['book', response.data.book?.id],
       });
       toast.success('Book returned successfully!');
     },
-    onError: (error: any, variables, context) => {
+    onError: (error: any, _variables, context) => {
       // Rollback optimistic update
       if (context?.previousLoans) {
         queryClient.setQueryData(['me', 'loans'], context.previousLoans);

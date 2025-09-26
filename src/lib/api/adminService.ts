@@ -25,9 +25,9 @@ class AdminApiService {
     };
   }
 
-  private getToken() {
-    return localStorage.getItem('auth-token');
-  }
+  // private _getToken() {
+  //   return localStorage.getItem('auth-token');
+  // }
 
   // Admin Overview
   async getOverview(): Promise<AdminOverview> {

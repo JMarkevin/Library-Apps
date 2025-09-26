@@ -12,7 +12,7 @@ export const AdminDeleteBookModal: React.FC<AdminDeleteBookModalProps> = ({
   isOpen,
   onClose,
   onConfirm,
-  bookTitle,
+  bookTitle: _bookTitle,
   isDeleting = false,
 }) => {
   if (!isOpen) return null;

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../store';
 import { setCredentials, logout, setLoading } from '../store/slices/authSlice';
 import { authApi } from '../lib/api';
-import type { LoginRequest, RegisterRequest } from '../lib/types';
+// import type { LoginRequest, RegisterRequest } from '../lib/types';
 
 export const useLogin = () => {
   const dispatch = useAppDispatch();
@@ -17,7 +17,10 @@ export const useLogin = () => {
       dispatch(setLoading(true));
     },
     onSuccess: (response) => {
-      const { token, user } = response.data;
+      const { token, user } = response.data as unknown as {
+        token: string;
+        user: any;
+      };
       dispatch(setCredentials({ token, user }));
       queryClient.invalidateQueries();
       toast.success('Login successful!');
@@ -44,7 +47,10 @@ export const useRegister = () => {
       dispatch(setLoading(true));
     },
     onSuccess: (response) => {
-      const { token, user } = response.data;
+      const { token, user } = response.data as unknown as {
+        token: string;
+        user: any;
+      };
       dispatch(setCredentials({ token, user }));
       queryClient.invalidateQueries();
       toast.success('Registration successful!');

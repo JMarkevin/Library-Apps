@@ -18,27 +18,27 @@ interface Category {
   name: string;
 }
 
-interface Book {
-  id: number;
-  title: string;
-  description: string;
-  isbn: string;
-  publishedYear: number;
-  pages: number;
-  authorId: number;
-  author: {
-    id: number;
-    name: string;
-  };
-  categoryId: number;
-  category: {
-    id: number;
-    name: string;
-  };
-  totalCopies: number;
-  availableCopies: number;
-  coverImage?: string;
-}
+// interface Book {
+//   id: number;
+//   title: string;
+//   description: string;
+//   isbn: string;
+//   publishedYear: number;
+//   pages: number;
+//   authorId: number;
+//   author: {
+//     id: number;
+//     name: string;
+//   };
+//   categoryId: number;
+//   category: {
+//     id: number;
+//     name: string;
+//   };
+//   totalCopies: number;
+//   availableCopies: number;
+//   coverImage?: string;
+// }
 
 const AdminEditBookPage: React.FC = () => {
   const navigate = useNavigate();
@@ -220,7 +220,7 @@ const AdminEditBookPage: React.FC = () => {
         // Limit to 6 categories and ensure we have valid data
         const limitedCategories = apiCategories
           .slice(0, 6)
-          .filter((cat) => cat && cat.id && cat.name);
+          .filter((cat: any) => cat && cat.id && cat.name);
         setCategories(limitedCategories);
       } else {
         // Fallback to predefined categories
@@ -470,7 +470,7 @@ const AdminEditBookPage: React.FC = () => {
         coverImage: formData.coverImage || '',
       };
 
-      const updateResponse = await adminApi.updateBook(
+      await adminApi.updateBook(
         parseInt(bookId),
         bookData
       );

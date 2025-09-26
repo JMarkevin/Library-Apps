@@ -7,7 +7,7 @@ import type {
   CreateReviewRequest,
   Author,
 } from '../lib/types';
-import { useAppSelector } from '../store';
+// import { useAppSelector } from '../store';
 
 export const useBooks = (params?: BooksQueryParams) => {
   return useQuery({
@@ -51,7 +51,7 @@ export const useTopRatedBooks = (limit: number = 6) => {
   });
 };
 
-export const useAllBooks = (searchQuery?: string, limit?: number) => {
+export const useAllBooks = (searchQuery?: string, _limit?: number) => {
   return useQuery({
     queryKey: ['books', 'all', searchQuery],
     queryFn: () => booksApi.getBooks(),
@@ -197,6 +197,7 @@ export const useCreateReview = () => {
       ]);
 
       // Optimistically add new review
+      const user = { id: 1, name: 'User', email: 'user@example.com' }; // Mock user for now
       if (user) {
         queryClient.setQueryData(['reviews', 'book', bookId], (old: any) => {
           if (old) {
