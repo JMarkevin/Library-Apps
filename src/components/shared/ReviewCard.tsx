@@ -16,7 +16,6 @@ interface ReviewCardProps {
   onEdit?: (review: ReviewType) => void;
   onDelete?: (reviewId: number) => void;
   currentUserId?: number;
-  bookId?: number; // Optional bookId to fetch book information
 }
 
 export const ReviewCard: React.FC<ReviewCardProps> = ({
@@ -25,7 +24,6 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
   onEdit,
   onDelete,
   currentUserId,
-  bookId: _bookId,
 }) => {
   // Fetch book information if bookId is provided
   // const { data: bookData } = useBookDetail(String(bookId || review.bookId));
@@ -89,7 +87,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
   return (
     <div
       ref={cardRef}
-      className={`relative flex flex-col items-start p-4 gap-4 w-full max-w-[361px] md:w-[590px] h-auto md:h-[204px] bg-white shadow-[0px_0px_20px_rgba(203,202,202,0.25)] rounded-2xl ${className}`}
+      className={`relative flex flex-col items-start p-4 gap-4 w-full md:w-[590px] h-auto md:h-[204px] bg-white shadow-[0px_0px_20px_rgba(203,202,202,0.25)] rounded-2xl flex-none order-0 flex-grow-1 ${className}`}
       onMouseEnter={() => setShowButtons(true)}
       onMouseLeave={() => {
         // Only hide if not hovering over buttons and not clicked
@@ -130,7 +128,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
       )}
 
       {/* User Info - Figma Frame 26 */}
-      <div className='flex flex-row items-start p-0 gap-3 w-full max-w-[326px] md:w-[326px] h-16'>
+      <div className='flex flex-row items-start p-0 gap-3 w-full md:w-full md:max-w-[558px] h-16'>
         {/* User Avatar */}
         <div className='w-16 h-16 bg-gray-200 rounded-full overflow-hidden flex-shrink-0'>
           {currentUserProfilePicture ? (
@@ -155,7 +153,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
         </div>
 
         {/* User Details - Figma Frame 12 */}
-        <div className='flex flex-col items-start p-0 w-full max-w-[250px] md:w-[250px] h-[62px] flex-shrink-0'>
+        <div className='flex flex-col items-start p-0 w-full md:w-full md:max-w-[482px] h-[62px] flex-shrink-0'>
           <h3
             className='w-full h-8 font-bold text-lg leading-8 tracking-[-0.02em] text-[#0A0D12] truncate'
             style={{ fontFamily: 'Quicksand, sans-serif' }}
@@ -178,7 +176,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
       </div>
 
       {/* Review Content - Figma Frame 27 */}
-      <div className='flex flex-col items-start p-0 pl-2 gap-2 w-full max-w-[329px] md:w-[558px] h-auto md:h-[92px]'>
+      <div className='flex flex-col items-start p-0 pl-2 gap-2 w-full md:w-[558px] h-auto md:h-[92px]'>
         {/* Star Rating */}
         <div className='flex flex-row items-center p-0 gap-1.5 w-[120px] md:w-[128px] h-6'>
           {Array.from({ length: 5 }).map((_, starIndex) => (

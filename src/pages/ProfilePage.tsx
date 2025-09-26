@@ -58,7 +58,6 @@ export const ProfilePage: React.FC = () => {
   // Handle tab URL parameter
   useEffect(() => {
     const tabParam = searchParams.get('tab');
-    console.log('URL tab parameter:', tabParam);
 
     if (
       tabParam === 'borrowed' ||
@@ -66,11 +65,9 @@ export const ProfilePage: React.FC = () => {
       tabParam === 'profile'
     ) {
       setActiveTab(tabParam as TabType);
-      console.log('Set active tab to:', tabParam);
     } else {
       // Default to profile if no valid tab parameter
       setActiveTab('profile');
-      console.log('No valid tab parameter, defaulting to profile');
     }
   }, [searchParams]);
 
@@ -91,7 +88,6 @@ export const ProfilePage: React.FC = () => {
         }
       );
       const profileData = await profileResponse.json();
-      console.log('Profile Response:', profileData);
 
       // Get profile from API and add localStorage profile picture if exists
       const apiProfile = profileData.data?.profile;
@@ -122,10 +118,8 @@ export const ProfilePage: React.FC = () => {
   };
 
   const handleGiveReview = (bookId: number, bookTitle: string) => {
-    console.log('Opening review modal for book:', bookId, bookTitle);
     setSelectedBook({ id: bookId, title: bookTitle });
     setIsReviewModalOpen(true);
-    console.log('Modal state set to true');
   };
 
   const handleSubmitReview = async (rating: number, comment: string) => {
@@ -150,14 +144,17 @@ export const ProfilePage: React.FC = () => {
       );
 
       const data = await response.json();
-      console.log('Review Response:', data);
 
       if (response.ok) {
         showSuccess(
           'Review Submitted',
           'Your review has been submitted successfully!'
         );
-        // Optionally refresh data or update UI
+        setIsReviewModalOpen(false);
+        setSelectedBook(null);
+        // Trigger refresh of reviews and profile data
+        setReviewsRefreshTrigger((prev) => prev + 1);
+        await fetchProfileData(); // Refresh the data immediately
       } else {
         throw new Error(data.message || 'Failed to submit review');
       }
@@ -174,18 +171,11 @@ export const ProfilePage: React.FC = () => {
   };
 
   const handleUpdateUserReview = async (
-    reviewId: number,
+    _reviewId: number,
     rating: number,
     comment: string
   ) => {
     try {
-      console.log('Updating review:', {
-        reviewId,
-        rating,
-        comment,
-        selectedBook,
-      });
-
       const token = localStorage.getItem('auth-token');
       if (!token) {
         throw new Error('No authentication token found');
@@ -201,8 +191,6 @@ export const ProfilePage: React.FC = () => {
         comment: comment,
       };
 
-      console.log('Request body:', requestBody);
-
       const response = await fetch(
         'https://belibraryformentee-production.up.railway.app/api/reviews',
         {
@@ -216,9 +204,6 @@ export const ProfilePage: React.FC = () => {
       );
 
       const data = await response.json();
-      console.log('Review Update Response:', data);
-      console.log('Response status:', response.status);
-      console.log('Response ok:', response.ok);
 
       if (response.ok) {
         showSuccess(
@@ -231,7 +216,6 @@ export const ProfilePage: React.FC = () => {
         // Trigger refresh of reviews
         setReviewsRefreshTrigger((prev) => prev + 1);
       } else {
-        console.error('Update failed:', data);
         throw new Error(data.message || 'Failed to update review');
       }
     } catch (error) {
@@ -314,9 +298,6 @@ export const ProfilePage: React.FC = () => {
         profilePictureChanged = true;
       }
 
-      console.log('Sending API payload:', apiPayload);
-      console.log('Profile picture changed:', profilePictureChanged);
-
       // Update API-supported fields if any changed
       if (Object.keys(apiPayload).length > 0) {
         const response = await fetch(
@@ -332,8 +313,6 @@ export const ProfilePage: React.FC = () => {
         );
 
         const data = await response.json();
-        console.log('Update Profile Response:', data);
-        console.log('Response Status:', response.status);
 
         if (!response.ok) {
           console.error('API Error Response:', data);
@@ -531,6 +510,7 @@ export const ProfilePage: React.FC = () => {
                   createdAt: review.createdAt,
                 }))}
                 currentUserId={profile?.id}
+                key={reviewsRefreshTrigger}
               />
             </div>
           </div>

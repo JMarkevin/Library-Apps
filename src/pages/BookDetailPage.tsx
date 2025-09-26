@@ -627,7 +627,7 @@ export const BookDetailPage: React.FC = () => {
               }).map((_, rowIndex) => (
                 <div
                   key={rowIndex}
-                  className='flex flex-col md:flex-row items-start p-0 gap-5 w-full max-w-[361px] md:max-w-[1200px] h-auto md:h-[204px]'
+                  className='flex flex-col md:flex-row items-start p-0 gap-5 w-full md:w-full md:max-w-[590px] h-auto'
                 >
                   {/* First Review Card */}
                   {book.reviews?.[rowIndex * 2] && (

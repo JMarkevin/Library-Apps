@@ -140,13 +140,6 @@ export const BorrowedListCard: React.FC<BorrowedListCardProps> = ({
         }
       );
       const data = await response.json();
-      console.log('My Loans Response:', data);
-      console.log('First loan structure:', data.data?.loans?.[0]);
-      console.log('First loan book structure:', data.data?.loans?.[0]?.book);
-      console.log(
-        'First loan author structure:',
-        data.data?.loans?.[0]?.book?.author
-      );
 
       const loans = data.data?.loans || [];
 
@@ -163,7 +156,6 @@ export const BorrowedListCard: React.FC<BorrowedListCardProps> = ({
               }
             );
             const bookData = await bookResponse.json();
-            console.log('Book details for loan:', loan.id, bookData);
 
             return {
               ...loan,
@@ -182,11 +174,6 @@ export const BorrowedListCard: React.FC<BorrowedListCardProps> = ({
             return loan; // Return original loan if book fetch fails
           }
         })
-      );
-
-      console.log(
-        'Final loans with full book details:',
-        loansWithFullBookDetails
       );
 
       if (append) {
@@ -232,7 +219,6 @@ export const BorrowedListCard: React.FC<BorrowedListCardProps> = ({
       );
 
       const data = await response.json();
-      console.log('Return Response:', data);
 
       if (response.ok) {
         alert('Book returned successfully!');
@@ -762,10 +748,8 @@ export const BorrowedListCardWithModal: React.FC<BorrowedListCardProps> = (
   } | null>(null);
 
   const handleGiveReview = (bookId: number, bookTitle: string) => {
-    console.log('Opening review modal for book:', bookId, bookTitle);
     setSelectedBook({ id: bookId, title: bookTitle });
     setIsReviewModalOpen(true);
-    console.log('Modal state set to true');
   };
 
   const handleSubmitReview = async (rating: number, comment: string) => {
@@ -790,7 +774,6 @@ export const BorrowedListCardWithModal: React.FC<BorrowedListCardProps> = (
       );
 
       const data = await response.json();
-      console.log('Review Response:', data);
 
       if (response.ok) {
         alert('Review submitted successfully!');
